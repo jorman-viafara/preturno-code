@@ -1,0 +1,188 @@
+.filtro-fecha-container {
+    width: 100%;
+    max-width: 400px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  
+  .filtro-fecha-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    letter-spacing: 0.025em;
+  }
+  
+  .filtro-fecha-wrapper {
+    position: relative;
+  }
+  
+  .input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon-calendar {
+    position: absolute;
+    left: 12px;
+    font-size: 18px;
+    color: #9ca3af;
+    pointer-events: none;
+    z-index: 1;
+    transition: color 0.2s ease;
+  }
+  
+  .filtro-fecha-input {
+    width: 60%;
+    padding: 12px 48px 12px 48px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    background-color: white;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filtro-fecha-input:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .filtro-fecha-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1), 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .filtro-fecha-input:focus + .icon-calendar {
+    color: #3b82f6;
+  }
+  
+  .clear-button {
+    position: absolute;
+    right: 130px;
+    background: none;
+    border: none;
+    color: #9ca3af;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.2s ease;
+  }
+  
+  .clear-button:hover {
+    color: #ef4444;
+    background-color: #fef2f2;
+  }
+  
+  .fecha-formateada {
+    margin-top: 8px;
+    padding: 12px;
+    background: linear-gradient(135deg, #ebf8ff 0%, #e0e7ff 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    animation: slideDown 0.3s ease;
+  }
+  
+  .fecha-formateada p {
+    margin: 0;
+    font-size: 14px;
+    color: #1d4ed8;
+    font-weight: 500;
+  }
+  
+  .indicator {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    border-radius: 1px;
+    width: 0;
+    transition: width 0.3s ease;
+  }
+  
+  .indicator.active {
+    width: 60%;
+  }
+  
+  .botones-rapidos {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .boton-rapido {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+  }
+  
+  .boton-hoy {
+    color: #1d4ed8;
+    border-color: #bfdbfe;
+    background-color: #ebf8ff;
+  }
+  
+  .boton-hoy:hover {
+    background-color: #dbeafe;
+    border-color: #93c5fd;
+    transform: translateY(-1px);
+  }
+  
+  .boton-ayer {
+    color: #374151;
+    border-color: #d1d5db;
+    background-color: #f9fafb;
+  }
+  
+  .boton-ayer:hover {
+    background-color: #f3f4f6;
+    border-color: #9ca3af;
+    transform: translateY(-1px);
+  }
+  
+  .boton-semana {
+    color: #7c3aed;
+    border-color: #c4b5fd;
+    background-color: #f5f3ff;
+  }
+  
+  .boton-semana:hover {
+    background-color: #ede9fe;
+    border-color: #a78bfa;
+    transform: translateY(-1px);
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .filtro-fecha-container {
+      max-width: 100%;
+    }
+  
+    .botones-rapidos {
+      justify-content: center;
+    }
+  }
+  

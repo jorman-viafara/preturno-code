@@ -1,0 +1,314 @@
+/* Overlay del modal */
+.modal-superposicion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  /* Contenedor principal del modal */
+  .contenido-modal {
+    background: white;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.4s ease;
+    padding: 32px;
+    position: relative;
+  }
+  
+  /* Título del modal */
+  .contenido-modal h3 {
+    margin: 0 0 32px 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(135deg, #0a2cb4 0%, #0de5ec);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+  }
+  
+  .contenido-modal h3::before {
+    content: "📋";
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+  }
+  
+  /* Inputs del modal */
+  .entrada-modal {
+    width: 100%;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #374151;
+    background: white;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  /* Iconos para cada input usando pseudo-elementos */
+  .entrada-modal:nth-of-type(2)::before {
+    content: "👤";
+    position: absolute;
+    left: -35px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #6b7280;
+  }
+  
+  .entrada-modal:nth-of-type(3)::before {
+    content: "🎯";
+    position: absolute;
+    left: -35px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #6b7280;
+  }
+  
+  .entrada-modal:nth-of-type(4)::before {
+    content: "🔗";
+    position: absolute;
+    left: -35px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #6b7280;
+  }
+  
+  .entrada-modal:nth-of-type(5)::before {
+    content: "📎";
+    position: absolute;
+    left: -35px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #6b7280;
+  }
+  
+  /* Estados de los inputs */
+  .entrada-modal:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+  
+  .entrada-modal:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1), 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .entrada-modal::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+  }
+  
+  /* Estilo especial para el input de archivo */
+  .entrada-modal[type="file"] {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 2px dashed #d1d5db;
+    cursor: pointer;
+    text-align: center;
+    padding: 24px 20px;
+    position: relative;
+  }
+  
+  .entrada-modal[type="file"]:hover {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+  }
+  
+  .entrada-modal[type="file"]::file-selector-button {
+    background: linear-gradient(135deg, #0a2cb4 0%, #0de5ec);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: all 0.2s ease;
+  }
+  
+  .entrada-modal[type="file"]::file-selector-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  }
+  
+  /* Contenedor de botones */
+  .botones-modal {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #f3f4f6;
+  }
+  
+  /* Botones */
+  .btn-enviar,
+  .btn-cancelar {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-enviar {
+    background: linear-gradient(135deg, #0de5ec 0%, #0a2cb4 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  }
+  
+  .btn-enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+  }
+  
+  .btn-enviar:active {
+    transform: translateY(0);
+  }
+  
+  .btn-enviar::before {
+    font-weight: bold;
+  }
+  
+  .btn-cancelar {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  }
+  
+  .btn-cancelar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+  }
+  
+  .btn-cancelar:active {
+    transform: translateY(0);
+  }
+  
+  .btn-cancelar::before {
+    content: "✕ ";
+    font-weight: bold;
+  }
+  
+  /* Animaciones */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .contenido-modal {
+      width: 95%;
+      margin: 20px;
+      padding: 24px;
+    }
+  
+    .contenido-modal h3 {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+  
+    .contenido-modal h3::before {
+      left: -30px;
+      font-size: 20px;
+    }
+  
+    .entrada-modal:nth-of-type(2)::before,
+    .entrada-modal:nth-of-type(3)::before,
+    .entrada-modal:nth-of-type(4)::before,
+    .entrada-modal:nth-of-type(5)::before {
+      display: none;
+    }
+  
+    .botones-modal {
+      flex-direction: column;
+    }
+  
+    .btn-enviar,
+    .btn-cancelar {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  /* Estados de carga */
+  .btn-enviar:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Scrollbar personalizado */
+  .contenido-modal::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .contenido-modal::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .contenido-modal::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+  }
+  
+  .contenido-modal::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+  }
+  

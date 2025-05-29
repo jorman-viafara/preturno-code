@@ -1,0 +1,289 @@
+
+/* Imagen bluelink*/
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.full-width-content {
+  width: 100%;
+}
+
+/* Filtro */
+
+.filtro-input-container {
+  margin-top: 1px;     /* separa del título */
+    margin-left: 95px;
+  align-self: flex-start; /* alinea a la izquierda dentro del contenedor flex */
+  width: 100%;
+  max-width: 350px;     /* opcional: limita el ancho */
+  border : 2px solid #0a2cb4;
+  border-radius: 5px;
+}
+
+/* Tabla */
+
+/* Contenedor general con scroll vertical si hay muchos datos */
+.table-wrapper {
+  width: 1100px ;
+  height: 400px ;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+/* Tabla general */
+.table {
+  font-size: 14px; /* Más pequeña */
+  border-radius: 6px;
+  background-color: #ffffff;
+  margin: 0;
+}
+
+/* Estilos del encabezado */
+.table thead th {
+  background-color: #0a2cb4 !important; /* Azul fuerte */
+  color: white;                         /* Texto blanco */
+  text-transform: uppercase;            /* Mayúsculas */
+  text-align: center;
+  font-weight: bold;
+  padding: 12px;
+}
+
+/* Celdas */
+.table th, .table td {
+  padding: 10px;
+  border: 1px solid #dee2e6 !important;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Hover en filas */
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilo de filas alternas */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+/* Botones */
+
+.botones-container {
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  gap: 16px;               /* espacio entre botones */
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.btn-azul {
+  background-color: #0a2cb4;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-azul:hover {
+  background-color: #0f66d0;
+}
+
+.btn-verde {
+  background-color: #0de5ec;
+  color: rgb(27, 27, 27);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-verde:hover {
+  background-color: #00fdfd;
+}
+
+/* Modal para insertar usuario*/
+/* Estilos generales para la modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.modal-content div {
+  margin-bottom: 10px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-enviar {
+  background-color: #0a2cb4;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-enviar:hover {
+  background-color: #0f66d0;
+}
+
+.btn-cancelar {
+  background-color: #0de5ec;
+  color: rgb(3, 3, 3);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-cancelar:hover {
+  background-color: #6ee5fa;
+}
+/* footer */
+footer {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Botón Añadir */
+
+.upload-container {
+  position: absolute;
+  top: 155px;       /* distancia desde la parte superior */
+  right: 128px;     /* distancia desde la derecha */
+  z-index: 1000;   /* asegúrate que esté sobre otros elementos */
+}
+
+.upload-button {
+  background-color: #0de5ec;
+  color: rgb(29, 28, 28);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-left: auto; /* Esto lo empuja completamente a la derecha */
+}
+
+.upload-button:hover {
+  background-color: #00fdfd;
+}
+
+.upload-container input[type="file"] {
+  display: none;
+}
+
+.page-container {
+  position: relative;
+}
+
+/* Subir preturno */
+.modal-superposicion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.contenido-modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contenido-modal h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.entrada-modal {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.botones-modal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-enviar {
+  background-color: #0a2cb4;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-enviar:hover {
+  background-color: #0f66d0;
+}
+
+.btn-cancelar {
+  background-color: #0de5ec;
+  color: rgb(3, 3, 3);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-cancelar:hover {
+  background-color: #6ee5fa;
+}
