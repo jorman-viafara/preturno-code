@@ -207,6 +207,6 @@ app.post('/update-json', async (req, res) => {
 
 
 
-app.listen(port, () => {
-  console.log(`Servidor escuchando en el puerto ${port}`);
-});
+app.listen(port, '0.0.0.0', () => {
+  console.log(`API corriendo en http://0.0.0.0:${port}`)
+})
