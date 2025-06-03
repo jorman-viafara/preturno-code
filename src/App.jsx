@@ -69,7 +69,7 @@ function App() {
   return (
     <div className="page-container">
       <header className="mb-4 text-center">
-        <img src="/bluelink_logo.png" alt="Encabezado" className="img-fluid mb-3" style={{ maxHeight: '80px' }} />
+        <img src="/preturno-admin/bluelink_logo.png" alt="Encabezado" className="img-fluid mb-3" style={{ maxHeight: '80px' }} />
       </header>
       {/* Botón para añadir preturno */}
       <div className="upload-container">
