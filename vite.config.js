@@ -8,4 +8,7 @@ export default defineConfig({
     host: true, // esto permite conexiones desde red local
     port: 5173  // opcional: podés fijar un puerto
   },
+  preview: {
+    allowedHosts: ['bluelink.local'],
+  },
 })
