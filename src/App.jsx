@@ -72,7 +72,7 @@ function App() {
         <img src="/preturno-admin/bluelink_logo.png" alt="Encabezado" className="img-fluid mb-3" style={{ maxHeight: '80px' }} />
       </header>
       {/* Botón para añadir preturno */}
-      <div className="upload-container">
+      <div style={{ marginTop: '30px' }} className="upload-container">
         <button onClick={() => setModalVisible(true)} className="btn-enviar">
           ➕ Añadir preturno
         </button>
