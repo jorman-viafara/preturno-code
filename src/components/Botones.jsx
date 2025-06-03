@@ -48,7 +48,7 @@ function Botones({ fetchData, setFilter }) {
             return;
         }
 
-        const response = await fetch('http://localhost:3015/agregar', {
+        const response = await fetch('http://10.99.0.5:3015/agregar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

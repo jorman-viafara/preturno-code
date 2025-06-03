@@ -20,7 +20,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:3015/preturno');
+      const response = await fetch('http://10.99.0.5:3015/preturno');
       const result = await response.json();
       setData(result);
     } catch (error) {
