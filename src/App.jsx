@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Filtro from './components/Filtro';
 import Tabla from './components/Tabla';
 import Botones from './components/Botones';
-import ModalSubida from './components/subirPreturno';
+import ModalSubida from './components/SubirPreturno';
 import Swal from 'sweetalert2';
 import FiltroFecha from './components/filtroFecha';
 import "./components/ModalSubida.css"
