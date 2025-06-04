@@ -6,6 +6,7 @@ import fs from 'fs';
 import axios from 'axios';
 import path from 'path';
 import connection from './database.js';
+import pool from './database.js';
 import dotenv from 'dotenv';
 
 const app = express();
@@ -31,49 +32,56 @@ app.use(cors({
 app.use(express.json());
 
 // Consultar tabla
-app.get('/preturno', (req, res) => {
-  const sql1 = `SET lc_time_names = 'es_ES'`;
-  const sql = `
-  SELECT 
-    tp.id, 
-    tp.cedula, 
-    tu.nombre AS \`nombre completo\`, 
-    DATE_FORMAT(tp.fecha, '%Y-%M-%d %H:%i:%s') AS \`fecha y hora\`, 
-    tp.pc_ingreso,
-    tp.estado
-  FROM tblpreturno tp
-  INNER JOIN tblusuarios tu ON tp.cedula = tu.cedula
-`;
-  connection.query(sql1, (err) => {
-    if (err) {
-      console.error('Error al establecer lc_time_names:', err);
-      return res.status(500).json({ error: 'Error configurando idioma' });
-    }
-    connection.query(sql, (err, results) => {
-      if (err) {
-        console.error('Error al ejecutar consulta:', err);
-        return res.status(500).json({ error: 'Error en la consulta' });
-      }
-      res.json(results);
-    });
-  });
+app.get('/preturno', async (req, res) => {
+  let connection;
+  try {
+    connection = await pool.getConnection();
+
+    await connection.query(`SET lc_time_names = 'es_ES'`);
+
+    const [results] = await connection.query(`
+      SELECT 
+        tp.id, 
+        tp.cedula, 
+        tu.nombre AS \`nombre completo\`, 
+        DATE_FORMAT(tp.fecha, '%Y-%M-%d %H:%i:%s') AS \`fecha y hora\`, 
+        tp.pc_ingreso,
+        tp.estado
+      FROM tblpreturno tp
+      INNER JOIN tblusuarios tu ON tp.cedula = tu.cedula
+    `);
+
+    res.json(results);
+  } catch (err) {
+    console.error('Error en /preturno:', err);
+    res.status(500).json({ error: 'Error al procesar la consulta' });
+  } finally {
+    if (connection) connection.release();
+  }
 });
 
 //Agregar usuarios
-app.post('/agregar', (req, res) => {
+app.post('/agregar', async (req, res) => {
   const { cedula, nombre } = req.body;
+
   if (!cedula || !nombre) {
     return res.status(400).json({ error: 'Faltan datos (cedula o nombre)' });
   }
-  const query = 'INSERT INTO tblusuarios (cedula, nombre) VALUES (?, ?)';
-  connection.query(query, [cedula, nombre], (err, results) => {
-    if (err) {
-      console.error('Error al insertar usuario:', err);
-      return resolveEnvPrefix.status(500).json({ error: 'Error al insertar usuario' });
-    }
-    res.json(results);
-  });
 
+  const query = 'INSERT INTO tblusuarios (cedula, nombre) VALUES (?, ?)';
+
+  try {
+    const conn = await pool.getConnection();
+    try {
+      const [results] = await conn.query(query, [cedula, nombre]);
+      res.json(results);
+    } finally {
+      conn.release();
+    }
+  } catch (err) {
+    console.error('Error al insertar usuario:', err);
+    res.status(500).json({ error: 'Error al insertar usuario' });
+  }
 });
 
 // Subida de archivo a GitHub
