@@ -45,14 +45,14 @@ const ModalSubida = ({ visible, onClose }) => {
     formData.append("file", file)
 
     try {
-      const fileRes = await fetch("http://10.99.0.5:3015/upload", {
+      const fileRes = await fetch("https://bluelink.local/api-preturno/upload", {
         method: "POST",
         body: formData,
       })
 
       if (!fileRes.ok) throw new Error("Error al subir archivo")
 
-      const jsonRes = await fetch("http://10.99.0.5:3015/update-json", {
+      const jsonRes = await fetch("https://bluelink.local/api-preturno/update-json", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
