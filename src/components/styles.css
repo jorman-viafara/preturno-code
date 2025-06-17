@@ -196,6 +196,12 @@ footer {
   right: 128px;     /* distancia desde la derecha */
   z-index: 1000;   /* asegúrate que esté sobre otros elementos */
 }
+.upload-container1 {
+  position: absolute;
+  top: 155px;       /* distancia desde la parte superior */
+  right: 320px;     /* distancia desde la derecha */
+  z-index: 1000;   /* asegúrate que esté sobre otros elementos */
+}
 
 .upload-button {
   background-color: #0de5ec;

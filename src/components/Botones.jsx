@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
+const ruta = import.meta.env.VITE_RUTA_BLK;
+const gruposDisponibles = ['RedColsa', 'Estategias'];
 function Botones({ fetchData, setFilter }) {
     const [isModalOpen, setIsModalOpen] = useState(false); // Controla si la modal esta abierta
     const [cedula, setCedula] = useState('');
     const [nombre, setNombre] = useState('');
+    const [grupo, setGrupo] = useState('');
 
     const handleActualizar = () => {
         setFilter('');      // Limpia el filtro
-        fetchData();        // Refresca los datos
+        fetchData(vistaActual);        // Refresca los datos
     };
 
 
     const limpiarCampos = () => {
         setCedula("")
         setNombre("")
-      }
+        setGrupo("")
+    }
 
     // Abre la modal
     const handleAgregar = () => {
@@ -47,13 +51,17 @@ function Botones({ fetchData, setFilter }) {
             popup('Error', 'El nombre solo debe contener letras y espacios', 'error', false);
             return;
         }
+        if (grupo.trim() === '') {
+            popup('Error', 'El grupo  no puede estar vacío, si no pertenece a ningun grupo digite "NINGUNO"', 'error', false);
+            return;
+        }
 
-        const response = await fetch('https://bluelink.local/api-preturno/agregar', {
+        const response = await fetch(ruta + '/agregar', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ cedula, nombre }),
+            body: JSON.stringify({ cedula, nombre, grupo }),
         });
 
         const data = await response.json();
@@ -103,6 +111,22 @@ function Botones({ fetchData, setFilter }) {
                             className="entrada-modal"
                             required
                         />
+                        <label>Grupo:</label>
+                        <select
+                            type="text"
+                            placeholder="Grupo"
+                            value={grupo}
+                            onChange={(e) => setGrupo(e.target.value)}
+                            className="entrada-modal"
+                        >
+
+                            <option value="">Selecciona un grupo</option>
+                            {gruposDisponibles.map((nombreGrupo, index) => (
+                                <option key={index} value={nombreGrupo}>
+                                    {nombreGrupo}
+                                </option>
+                            ))}
+                        </select>
 
 
 

@@ -6,11 +6,14 @@ import ModalSubida from './components/SubirPreturno';
 import Swal from 'sweetalert2';
 import FiltroFecha from './components/filtroFecha';
 import "./components/ModalSubida.css"
+import TablaPreturno from './components/TablaRegistrosPreturno';
 
+const ruta = import.meta.env.VITE_RUTA_BLK;
 function App() {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [vistaActual, setVistaActual] = useState(false);
   const [fechaFiltro, setFechaFiltro] = useState('');
 
 
@@ -18,9 +21,16 @@ function App() {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
+  const fetchData = async (vista) => {
     try {
-      const response = await fetch('https://bluelink.local/api-preturno/preturno');
+      const url =
+        vista === 'preturno'
+          ? ruta+'/registros'
+          : ruta+'/preturno';
+          
+          
+
+      const response = await fetch(url);
       const result = await response.json();
       setData(result);
     } catch (error) {
@@ -46,7 +56,7 @@ function App() {
 
 
   function fechaTextoAFechaISO(fechaTexto) {
-    // fechaTexto ejemplo: "2025-mayo-28 00:00:00"
+    // fechaTexto
     const [fechaParte] = fechaTexto.split(' '); // "2025-mayo-28"
     const [anio, mesTexto, dia] = fechaParte.split('-');
     const mesNumero = meses[mesTexto.toLowerCase()];
@@ -54,7 +64,7 @@ function App() {
     return `${anio}-${mesNumero}-${dia.padStart(2, '0')}`;
   }
 
-  // Luego en el filtro:
+  // Luego en el filtro
   const filteredData = data.filter(item => {
     const matchesText = Object.values(item).some(value =>
       String(value).toLowerCase().includes(filter.toLowerCase())
@@ -66,6 +76,12 @@ function App() {
     return matchesText && matchesDate;
   });
 
+  const toggleVista = () => {
+    const nuevaVista = vistaActual === 'preturno' ? 'registros' : 'preturno';
+    setVistaActual(nuevaVista);
+    fetchData(nuevaVista);
+  };
+
   return (
     <div className="page-container">
       <header className="mb-4 text-center">
@@ -74,7 +90,13 @@ function App() {
       {/* Botón para añadir preturno */}
       <div style={{ marginTop: '30px' }} className="upload-container">
         <button onClick={() => setModalVisible(true)} className="btn-enviar">
-          ➕ Añadir preturno
+          ➕ Añadir Preturno
+        </button>
+      </div>
+      {/* Botón para alternar entre vistas */}
+      <div style={{ marginTop: '30px' }} className="upload-container1">
+        <button onClick={toggleVista} className="btn-enviar">
+          {vistaActual === 'preturno' ? '👤 Seguimiento Analistas' : '📋 Registros Preturno'}
         </button>
       </div>
       <div className="full-width-content">
@@ -92,11 +114,15 @@ function App() {
           </div>
           <FiltroFecha fechaFiltro={fechaFiltro} setFechaFiltro={setFechaFiltro} />
         </div>
-        <Tabla data={filteredData} />
-        <Botones fetchData={fetchData} setFilter={setFilter} />
+        {vistaActual === 'preturno' ? (
+            <Tabla data={filteredData} />
+          ) : (
+            <TablaPreturno data={filteredData} />
+          )}
+        <Botones fetchData={fetchData} setFilter={setFilter} vistaActual={setVistaActual}/>
       </div>
       <footer className="text-center text-muted mt-5 mb-3">
-        ©2025 Juan_DiegoDEV | ©MerzDev | ©JormanDEV  Todos los derechos reservados.
+        ©2025 Juan_DiegoDEV | ©MerzDEV | ©JormanDEV  Todos los derechos reservados.
       </footer>
       <ModalSubida visible={modalVisible} onClose={() => setModalVisible(false)} />
     </div>
