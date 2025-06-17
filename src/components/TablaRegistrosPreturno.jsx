@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Tabla({ data }) {
+function TablaPreturno({ data }) {
   if (!data.length) {
     return <h5 className="text-center">No hay datos para mostrar.</h5>;
   }
@@ -48,4 +48,4 @@ function Tabla({ data }) {
   );
 }
 
-export default Tabla;
+export default TablaPreturno;

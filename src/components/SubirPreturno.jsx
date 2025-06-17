@@ -4,13 +4,19 @@ import { useState, useRef } from "react"
 import Swal from "sweetalert2"
 import "./ModalSubida.css"
 
+const ruta = import.meta.env.VITE_RUTA_BLK;
+
+const gruposDisponibles = ['RedColsa', 'Estategias'];
 const ModalSubida = ({ visible, onClose }) => {
+  const [grupo, setgrupo] = useState("")
   const [cliente, setCliente] = useState("")
   const [campania, setCampania] = useState("")
   const [link, setLink] = useState("")
   const fileInputRef = useRef(null)
 
+
   const limpiarCampos = () => {
+    setgrupo("")
     setCliente("")
     setCampania("")
     setLink("")
@@ -22,7 +28,7 @@ const ModalSubida = ({ visible, onClose }) => {
   const handleSubmit = async () => {
     const file = fileInputRef.current.files[0]
 
-    if (!cliente || !campania || !file || !link) {
+    if (!grupo || !cliente || !campania || !file || !link) {
       Swal.fire("Campos requeridos", "Por favor completa todos los campos y selecciona un archivo.", "warning")
       return
     }
@@ -42,25 +48,19 @@ const ModalSubida = ({ visible, onClose }) => {
     }
 
     const formData = new FormData()
-    formData.append("file", file)
+    formData.append("grupo", grupo)
+    formData.append("cliente", cliente)
+    formData.append("campania", campania)
+    formData.append("evaluacion", link)
+    formData.append("archivo", file)
 
     try {
-      const fileRes = await fetch("https://bluelink.local/api-preturno/upload", {
+      const res = await fetch(`${ruta}/insertar`, {
         method: "POST",
         body: formData,
       })
 
-      if (!fileRes.ok) throw new Error("Error al subir archivo")
-
-      const jsonRes = await fetch("https://bluelink.local/api-preturno/update-json", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ cliente, campaña: campania, link }),
-      })
-
-      if (!jsonRes.ok) throw new Error("Error al enviar JSON")
+      if (!res.ok) throw new Error("Error al registrar el preturno")
 
       Swal.fire("Excelente", "Preturno registrado correctamente", "success")
       limpiarCampos()
@@ -77,6 +77,23 @@ const ModalSubida = ({ visible, onClose }) => {
     <div className="modal-superposicion">
       <div className="contenido-modal">
         <h3>Registrar preturno</h3>
+
+
+        <select
+          type="text"
+          placeholder="Grupo"
+          value={grupo}
+          onChange={(e) => setgrupo(e.target.value)}
+          className="entrada-modal"
+        >
+
+          <option value="">Selecciona un grupo</option>
+          {gruposDisponibles.map((nombreGrupo, index) => (
+            <option key={index} value={nombreGrupo}>
+              {nombreGrupo}
+            </option>
+          ))}
+        </select>
 
         <input
           type="text"
@@ -111,7 +128,7 @@ const ModalSubida = ({ visible, onClose }) => {
 
         <div className="botones-modal">
           <button className="btn-enviar" onClick={handleSubmit}>
-          ✓ Aceptar
+            ✓ Aceptar
           </button>
           <button
             className="btn-cancelar"
