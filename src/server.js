@@ -103,7 +103,7 @@ app.post('/agregar', async (req, res) => {
 
 // Cargar autenticacion de Google
 const auth = new google.auth.GoogleAuth({
-  keyFile: 'src\\components\\repositorio-preturno-462496c1f0c4.json',
+  keyFile: process.env.keyfileBLK,
   scopes: ['https://www.googleapis.com/auth/drive'],
 });
 //Insertar en tblregistroPreturno
