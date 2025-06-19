@@ -145,7 +145,7 @@ function Botones({ fetchData, setFilter }) {
                 </button>
                 <button onClick={handleAgregarMasivo} className="btn-verde">
                     Agregar Usuario Masivamente
-                </button>
+                </button> 
             </div> 
 
             {/* Modal */}
